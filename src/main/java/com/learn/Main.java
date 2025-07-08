@@ -3,9 +3,10 @@ package com.learn;
 
 import com.learn.model.Customer;
 import com.learn.model.LoanApplication;
+  public class Main {
 
-public class Main {
-    public static void main(String[] args) {
+
+  public static void main(String[] args) {
         System.out.println("Hello world!");
         
          LoanApplication loanApplication = new LoanApplication.Builder()
