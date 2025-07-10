@@ -1,0 +1,6 @@
+com/learn/model/Customer.class
+com/learn/Main.class
+com/learn/service/LoanApprovalService.class
+com/learn/model/LoanApplication.class
+com/learn/model/LoanApplication$Builder.class
+com/learn/model/Customer$Builder.class

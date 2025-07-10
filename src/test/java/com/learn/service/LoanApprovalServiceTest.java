@@ -1,6 +1,7 @@
 package com.learn.service;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import com.learn.model.Customer;
 import com.learn.model.LoanApplication;
 
@@ -9,12 +10,37 @@ public class LoanApprovalServiceTest {
 
     @Test
     void testApproveLoanApplication() {
+        // Test with a valid customer and loan application
+        LoanApplication loanApplication = new LoanApplication.Builder()
+                .setApplicationId(1)
+                .setCreditScore(5.0f)
+                .setLoanAmount(200000.0)
+                .setTenure(7)
+                .setInterestRate(4.5)
+                .build();
 
+        Customer customer = new Customer.Builder()
+                .setCustomerId(101)
+                .setCustomerName("Test Customer")
+                .setCustomerEmail("test@example.com")
+                .setCustomerPhone("123-456-7890")
+                .setLoanApplication(loanApplication)
+                .setAge(35)
+                .build();
+
+        LoanApprovalService service = LoanApprovalService.getInstance();
+        assertTrue(service.approveLoanApplication(customer));
     }
 
     @Test
     void testGetInstance() {
-
+        // Test singleton pattern - multiple calls should return same instance
+        LoanApprovalService service1 = LoanApprovalService.getInstance();
+        LoanApprovalService service2 = LoanApprovalService.getInstance();
+        
+        assertNotNull(service1);
+        assertNotNull(service2);
+        assertSame(service1, service2);
     }
 
     @Test
@@ -40,13 +66,13 @@ public class LoanApprovalServiceTest {
 
 
         LoanApprovalService service = LoanApprovalService.getInstance();
-        assert service.approveLoanApplication(customer);
+        assertTrue(service.approveLoanApplication(customer));
     }
 
     @Test
     void testApproveLoanApplication_NullCustomer() {
         LoanApprovalService service = LoanApprovalService.getInstance();
-        assert !service.approveLoanApplication(null);
+        assertFalse(service.approveLoanApplication(null));
     }
 
         
@@ -61,7 +87,7 @@ public class LoanApprovalServiceTest {
 
 
         LoanApprovalService service = LoanApprovalService.getInstance();
-        assert !service.approveLoanApplication(customer);
+        assertFalse(service.approveLoanApplication(customer));
     }
 
     @Test
@@ -77,7 +103,7 @@ public class LoanApprovalServiceTest {
             .build();
 
         LoanApprovalService service = LoanApprovalService.getInstance();
-        assert !service.approveLoanApplication(customer);
+        assertFalse(service.approveLoanApplication(customer));
 
         
     }
@@ -96,7 +122,7 @@ public class LoanApprovalServiceTest {
             .build();
 
         LoanApprovalService service = LoanApprovalService.getInstance();
-        assert !service.approveLoanApplication(customer);
+        assertFalse(service.approveLoanApplication(customer));
     }
 
     @Test
@@ -113,7 +139,7 @@ public class LoanApprovalServiceTest {
             .build();
 
         LoanApprovalService service = LoanApprovalService.getInstance();
-        assert !service.approveLoanApplication(customer);
+        assertFalse(service.approveLoanApplication(customer));
     }
 
     @Test
@@ -130,7 +156,7 @@ public class LoanApprovalServiceTest {
             .build();
 
         LoanApprovalService service = LoanApprovalService.getInstance();
-        assert !service.approveLoanApplication(customer);
+        assertFalse(service.approveLoanApplication(customer));
     }
 
 
@@ -148,7 +174,7 @@ void testApproveLoanApplication_EdgeCaseAge18() {
         .build();
 
     LoanApprovalService service = LoanApprovalService.getInstance();
-    assert service.approveLoanApplication(customer);
+    assertTrue(service.approveLoanApplication(customer));
 }
 
 @Test
@@ -165,7 +191,7 @@ void testApproveLoanApplication_EdgeCaseAge65() {
         .build();
 
     LoanApprovalService service = LoanApprovalService.getInstance();
-    assert service.approveLoanApplication(customer);
+    assertTrue(service.approveLoanApplication(customer));
 }
 
 @Test
@@ -182,7 +208,7 @@ void testApproveLoanApplication_EdgeCaseLoanAmount500000() {
         .build();
 
     LoanApprovalService service = LoanApprovalService.getInstance();
-    assert service.approveLoanApplication(customer);
+    assertTrue(service.approveLoanApplication(customer));
 }
 
 @Test
@@ -199,7 +225,7 @@ void testApproveLoanApplication_EdgeCaseCreditScoreJustAbove() {
         .build();
 
     LoanApprovalService service = LoanApprovalService.getInstance();
-    assert service.approveLoanApplication(customer);
+    assertTrue(service.approveLoanApplication(customer));
 }
 
 @Test
@@ -216,7 +242,7 @@ void testApproveLoanApplication_EdgeCaseTenure9() {
         .build();
 
     LoanApprovalService service = LoanApprovalService.getInstance();
-    assert service.approveLoanApplication(customer);
+    assertTrue(service.approveLoanApplication(customer));
 }
 
 
@@ -236,7 +262,7 @@ void testApproveLoanApplication_AllInvalid() {
         .build();
 
     LoanApprovalService service = LoanApprovalService.getInstance();
-    assert !service.approveLoanApplication(customer);
+    assertFalse(service.approveLoanApplication(customer));
 }
 }
 
